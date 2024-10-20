@@ -126,7 +126,7 @@ class Ce:
         elements=list(set(elements))
         rfx=[0 for i in elements]
         pfx=rfx.copy()
-        print(elements)
+        # print(elements)
         for i in range(len(elements)):
             for j in range(len(reactant)):
                 if elements[i] in reactant[j][0]:
@@ -136,23 +136,23 @@ class Ce:
             for j in range(len(product)):
                 if elements[i] in product[j][0]:
                     pfx[i]+=product[j][1][product[j][0].index(elements[i])]*self.parameters[len(reactant)+j]
-        print(rfx,pfx)
+        # print(rfx,pfx)
         fxs=[]
         for i in range(len(elements)):
             eq=sympy.Eq(rfx[i],pfx[i])
             fxs.append(eq)
-        print(fxs)
+        # print(fxs)
         # print(self.parameters[:len(reactant)+len(product)-1])
         Flag=False
         k=0
         while not Flag:
-            print(k)
+            # print(k)
             t=self.parameters[:len(reactant)+len(product)].copy()
             t.pop(k)
-            print(t)
+            # print(t)
             ans=sympy.solve(fxs,t)
             try:
-                print(ans)
+                # print(ans)
                 min_coefficient=1
                 parameter=[]
                 for i in range(len(list(ans.keys()))):
@@ -169,10 +169,10 @@ class Ce:
                 Flag=True
                 break
             except Exception as e:
-                print(e)
+                # print(e)
                 k+=1
             if k>=len(self.parameters[:len(reactant)+len(product)]):
-                print("无法配平")
+                # print("无法配平")
                 exit(-1)
         # print(parameter)
         answer=""
